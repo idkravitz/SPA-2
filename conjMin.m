@@ -38,9 +38,9 @@ for k = 1:maxit
     wmax = min(wmax, fmin);
     % wmin
     % wmax
-    if fmin > wmax
-        printf('alert');
-    end
+    % if fmin > wmax
+        % printf('alert, fmin = %g > wmax = %g\n', fmin, wmax);
+    % end
 
     err = abs(wmax - wmin);
     fprintf('%3d. err %g\n', k, err);

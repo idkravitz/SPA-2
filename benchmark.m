@@ -1,5 +1,5 @@
-function benchmark(fun, fundot)
-	x0 = ones(10, 1) * 5;
+function benchmark(fun, fundot, dim=10)
+	x0 = ones(dim, 1) * 5;
 	printf('benchmark of SPA\n');
 	[fmin, xmin] = conjMin(fun, fundot, x0, 0);
 	printf('benchmark of SPA-1\n');
@@ -9,8 +9,6 @@ function benchmark(fun, fundot)
 	printf('benchmark of R-ALG\n');
 endfunction
 
-printf('Simplest cases\n');
-
 global a = rand();
 global b = rand();
 
@@ -19,10 +17,10 @@ function y = linf(x)
 	global b;
 	szx = size(x);
 	if !isequal(size(a), szx)
-		a = rand(szx) * 1;
+		a = (rand(szx) * 1) * 3;
 	end
 	if !isequal(size(b), szx)
-		b = rand(szx) * 1 - .5;
+		b = (rand(szx) * 1 - .5) * 10;
 	end
 	y = a' * abs(x - b);
 endfunction
@@ -32,12 +30,17 @@ function dy = linfdot(x)
 	global b;
 	szx = size(x);
 	if !isequal(size(a), szx)
-		a = rand(szx) * 1;
+		a = (rand(szx) * 1) * 3;
 	end
 	if !isequal(size(b), szx)
-		b = rand(szx) * 1 - 0.5;
+		b = (rand(szx) * 1 - 0.5) * 10;
 	end
 	dy = a .* sign(x - b);
 endfunction
 
-benchmark(@linf, @linfdot)
+dim = 10;
+printf('Simplest cases, dim = %d\n', dim);
+benchmark(@linf, @linfdot, dim);
+dim = 100;
+printf('Simplest cases, dim = %d\n', dim);
+benchmark(@linf, @linfdot, dim);
