@@ -20,7 +20,7 @@ ub = ones(N + 1, 1) * inf;
 eps = 1;
 P = [
 fdot(x0), zeros(N, 1);
-x0' * fdot(x0) - f(x0), 100
+x0' * fdot(x0) - f(x0), 500
 ];
 
 % rand('seed', 13569);
@@ -36,8 +36,8 @@ for k = 1:maxit
     xtilde = xv(1:end-1);
     fmin = -xv(end);
     wmax = min(wmax, fmin);
-    wmin
-    wmax
+    % wmin
+    % wmax
     if fmin > wmax
         printf('alert');
     end
@@ -65,17 +65,19 @@ for k = 1:maxit
     ];
     
     % P
-    xbar
-    gbar_old = fdot(xbar)
-    fbar_old = xbar' * gbar_old - f(xbar)
-    xtilde
-    fmin
+    % xbar
+    % gbar_old = fdot(xbar);
+    % fbar_old = xbar' * gbar_old - f(xbar);
+    % xtilde
+    % fmin
 
     % if ( index(lastwarn(), 'division by zero') > 0 )
      % error('division by zero before cmMin')
     % endif
+
+    % Version selection, possible variants: 0 for SPA, 1 for SPA-1, 2 for SPA-2
     if version == 2
-        lm = cmMin(lmDot, [0, 100, 0; 0, 0, 100], 0)
+        lm = cmMin(lmDot, [0, 100, 0; 0, 0, 100], 0);
     % if ( index(lastwarn(), 'division by zero') > 0 )
      % error('division by zero after cmMin')
     % endif
@@ -83,14 +85,14 @@ for k = 1:maxit
         xnew = (xbar + lm(2)*xtilde) / (1+lm(1)+lm(2));
     elseif version == 1
         lmFun = @(l) (1+l)*f(xbar/(1+l)) + l*wmax;
-        l = fminbnd(lmFun, 0, 10000, struct('TolX', 1e-12, 'TolFun', 1e-12))
+        l = fminbnd(lmFun, 0, 10000, struct('TolX', 1e-12, 'TolFun', 1e-12));
         xnew = xbar/(1+l);
     elseif version == 0
         xnew = xbar;
     end
-    gnew = fdot(xnew)
+    gnew = fdot(xnew);
     fnew = xnew' * gnew - f(xnew);
-    fnew
+    % fnew
 
     pk = [gnew; fnew];
     P = [P, pk];
