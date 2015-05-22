@@ -138,8 +138,8 @@ while ( iter(1) < maxit )
         endswitch
         
 
-        verbose(1) > 0 && mod(iter(1), verbose(1)) == 0 &&                      \
-                printf(" +++ iter %4d in %4d basis %4d zx %12.4e zz %16.8e\n",  \
+        verbose(1) > 0 && mod(iter(1), verbose(1)) == 0 &&                      ...
+                printf(" +++ iter %4d in %4d basis %4d zx %12.4e zz %16.8e\n",  ...
                    iter(1), ix, baslen, reps, zz);
         
         
@@ -263,8 +263,8 @@ while ( iter(1) < maxit )
                 
                 iter(2)++;
 
-                verbose(2) > 0 && mod(iter(2), verbose(2)) == 0 &&                      \
-                        printf(" --- intc %4d out  %4d (%4d) basis %4d step %12.4e zz %14.6e\n", \
+                verbose(2) > 0 && mod(iter(2), verbose(2)) == 0 &&                      ...
+                        printf(" --- intc %4d out  %4d (%4d) basis %4d step %12.4e zz %14.6e\n", ...
                            iter(2), kout, iox, baslen, t, zz);
                 
                 t <= 0 && verbose(1) >= 0 && printf("XXX step t negative %e\n", t);
